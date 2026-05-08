@@ -40,6 +40,16 @@ app.post("/imc",(req,res) => {
         imc:  imc.toFixed(2)
     })
 })
+
+app.post("/imc",(req,res) => {
+    const {nome,nota1,nota2,media, }= req.body 
+
+    if (! nome || !nota1 || !nota2  || !media ){
+        return res .status(404).json({erro:"a media esta incompletas"})
+    }
+
+    const imc = media / (nota1 * nota1)
+})
 //finalzao
 app.listen( port,()=> {
     console.log (`Servidor rodando em http://localhost:${port}`)
