@@ -50,15 +50,11 @@ app.post("/media",(req,res) => {
 
     const  media = ( parseFloat(nota1)+ parseFloat(nota2))/2 
 
-    if(!aprovado || !reprovado){
-        return res .status().json({media:"70, 20"})
-    }
-    ifs(!aprovado || !reprovado)
 
     res.json({
         nome,
         nota2,
-        mensagem:"",
+        mensagem: media >=7 ? "aprovado": "reprovado",
         media:parseFloat(media)
     })
 })
