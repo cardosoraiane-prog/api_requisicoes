@@ -50,7 +50,6 @@ app.post("/media",(req,res) => {
 
     const  media = ( parseFloat(nota1)+ parseFloat(nota2))/2 
 
-
     res.json({
         nome,
         nota2,
