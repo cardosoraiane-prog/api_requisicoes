@@ -53,6 +53,8 @@ app.post("/media",(req,res) => {
     if(!aprovado || !reprovado){
         return res .status().json({media:"70, 20"})
     }
+    ifs(!aprovado || !reprovado)
+
     res.json({
         nome,
         nota2,
