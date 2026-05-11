@@ -41,14 +41,24 @@ app.post("/imc",(req,res) => {
     })
 })
 
-app.post("/imc",(req,res) => {
-    const {nome,nota1,nota2,media, }= req.body 
+app.post("/media",(req,res) => {
+    const {nome,nota1,nota2 }= req.body 
 
-    if (! nome || !nota1 || !nota2  || !media ){
-        return res .status(404).json({erro:"a media esta incompletas"})
+    if (!nome || !nota1 || !nota2  ){
+        return res .status(404).json({erro:"dados incompletas"})
     }
 
-    const imc = media / (nota1 * nota1)
+    const  media = ( parseFloat(nota1)+ parseFloat(nota2))/2 
+
+    if(!aprovado || !reprovado){
+        return res .status().json({media:"70, 20"})
+    }
+    res.json({
+        nome,
+        nota2,
+        mensagem:"",
+        media:parseFloat(media)
+    })
 })
 //finalzao
 app.listen( port,()=> {
