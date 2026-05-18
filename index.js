@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.json());
 
 
-//http://localhost:3000/saudacao?nome=maria. 
+//http://localhost:3000/saudacao?nome=maria 
 app.get("/saudacao",(req,res)=>{
     const nome = req.query.nome; 
    
