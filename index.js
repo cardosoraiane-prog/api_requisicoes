@@ -1,13 +1,12 @@
 const express = require("express");
 const fs = require("fs");
+const cors = require("cors");
 
 const app = express();
-const cors = require("cors");
-    app.use(cors());
 const port = 3000;
 
 app.use(express.json());
-
+app.use(cors());
 
 //http://localhost:3000/saudacao?nome=maria 
 app.get("/saudacao",(req,res)=>{
@@ -28,6 +27,7 @@ app.get("/saudacao",(req,res)=>{
 })
 
 app.post("/imc",(req,res) => {
+    console.log(req)
     const { nome, idade, altura, peso}= req.body;
     
     if(!nome || !idade || !altura || !peso){
