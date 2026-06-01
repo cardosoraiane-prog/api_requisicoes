@@ -27,7 +27,7 @@ app.get("/saudacao",(req,res)=>{
 })
 
 app.post("/imc",(req,res) => {
-    console.log(req)
+
     const { nome, idade, altura, peso}= req.body;
     
     if(!nome || !idade || !altura || !peso){
@@ -58,6 +58,21 @@ app.post("/media",(req,res) => {
         mensagem: media >=7 ? "aprovado": "reprovado",
         media:parseFloat(media)
     })
+})
+
+app.post("/login",(req,res) => {
+    const {email,senha }= req.body 
+
+    if (!email || !senha  ){
+        return res.status(404).json({erro:"dados incompletas"})
+    }
+    if(email=="admin@admin.com"&& senha=="123456"){
+        res.json({token:"123456"})
+
+    }else{
+        return res.status(404).json({erro:"usuario não incontrado"})
+    }
+  
 })
 //finalzao
 app.listen( port,()=> {
