@@ -1,12 +1,18 @@
 const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
+const path=require("path");
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 app.use(cors());
+
+const cllientesFile=path.joi(___dirname,"clinetes.josn")
+function lerClientes(){
+    if(!)
+}
 
 //http://localhost:3000/saudacao?nome=maria 
 app.get("/saudacao",(req,res)=>{
@@ -26,20 +32,20 @@ app.get("/saudacao",(req,res)=>{
 )
 })
 
-app.post("/imc",(req,res) => {
+app.post("/cadastro",(req,res) => {
 
-    const { nome, idade, altura, peso}= req.body;
+    const { nome, cpf, cep, }= req.body;
     
-    if(!nome || !idade || !altura || !peso){
+    if(!nome || !cpf || !cep ){
       return res .status(404).json({erro:"Dados incompletos"})
     }
    
-    const imc = peso / (altura * altura);
 
     res.json({
         nome,
-        idade,
-        imc:  imc.toFixed(2)
+       cpf,
+       cep
+       
     })
 })
 
@@ -56,7 +62,7 @@ app.post("/media",(req,res) => {
         nome,
         nota2,
         mensagem: media >=7 ? "aprovado": "reprovado",
-        media:parseFloat(media)
+        media: parseFloat(media)
     })
 })
 
