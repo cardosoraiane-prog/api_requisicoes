@@ -9,10 +9,25 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-const cllientesFile=path.joi(___dirname,"clinetes.josn")
-function lerClientes(){
-    if(!)
+const cllientesFile=path.joi(___dirname,"clietes.josn")
+
+function salvarClientes(Clientes){
+    fs.writeFileSync(cllientesFile , JOSON.stringify(clientes, null,2),"utf8")
 }
+
+app.post('/clientes',(req,res)=> {
+    const{nome,cpf,cep,rua,cidade,estado,numero}=req.body;
+    if(!nome || !cpf || !cep){
+        return res.status(404).json({erro: "dados incompletos"})
+    }
+    const clientes= lerClientes();
+    if(clientes.some(c => c.cpf===cpf )){
+        return res.status(400).json({erro:"cliente ja cadastrado"})
+    }
+    const novoCliente={nome,cpf,cep,rua,cidade,estado,numero};
+    clientes.push(novoCliente);
+
+})
 
 //http://localhost:3000/saudacao?nome=maria 
 app.get("/saudacao",(req,res)=>{
