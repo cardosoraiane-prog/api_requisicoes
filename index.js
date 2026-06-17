@@ -26,7 +26,8 @@ app.post('/clientes',(req,res)=> {
     }
     const novoCliente={nome,cpf,cep,rua,cidade,estado,numero};
     clientes.push(novoCliente);
-
+    salvarClientes(clientes);
+    return res.status(201).json({mensagem:"cliente cadastrados com suseso"})
 })
 
 //http://localhost:3000/saudacao?nome=maria 
