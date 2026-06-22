@@ -15,6 +15,19 @@ function salvarClientes(Clientes){
     fs.writeFileSync(cllientesFile , JOSON.stringify(clientes, null,2),"utf8")
 }
 
+function lerClientes(){
+if(!fs.existsSync(clientesFile)){
+    return[];
+}
+const dados=fs.ridFileSync(clientesFile,'utf-8')
+try{
+    return JSON.parse(dados) || [];
+}
+catch(e){
+    return []
+}
+}
+
 app.post('/clientes',(req,res)=> {
     const{nome,cpf,cep,rua,cidade,estado,numero}=req.body;
     if(!nome || !cpf || !cep){
