@@ -9,23 +9,23 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-const cllientesFile=path.joi(___dirname,"clietes.josn")
+const clientesFile=path.join(__dirname,"clientes.josn")
 
-function salvarClientes(Clientes){
-    fs.writeFileSync(cllientesFile , JOSON.stringify(clientes, null,2),"utf8")
+function salvarClientes(clientes){
+    fs.writeFileSync(clientesFile , JSON.stringify(clientes, null,2),"utf8")
 }
 
 function lerClientes(){
 if(!fs.existsSync(clientesFile)){
     return[];
 }
-const dados=fs.ridFileSync(clientesFile,'utf-8')
+const dados=fs.readFileSync(clientesFile,'utf-8')
 try{
     return JSON.parse(dados) || [];
 }
 catch(e){
-    return []
-}
+         return []
+    }
 }
 
 app.post('/clientes',(req,res)=> {
