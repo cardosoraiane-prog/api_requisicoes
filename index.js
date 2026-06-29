@@ -42,8 +42,10 @@ app.post('/clientes',(req,res)=> {
     salvarClientes(clientes);
     return res.status(201).json({mensagem:"cliente cadastrados com suseso"})
 })
+
+////
 app.post('/usuario',(req,res)=> {
-    const{nome,email,senha,}=req.body;
+    const{nome,email,senha}=req.body;
     if(!nome || !email || !senha){
         return res.status(404).json({erro: "dados incompletos"})
     }
@@ -54,8 +56,26 @@ app.post('/usuario',(req,res)=> {
     const novoUsuario={nome,email,senha,};
     usuario.push(novoUsuario);
     salvarUsuario(usuario);
-    return res.status(201).json({mensagem:"cliente cadastrados com suseso"})
+    return res.status(201).json({mensagem:"usuario cadastrados com suseso"})
 })
+const usuarioFile=path.join(__dirname,"usuario.json")
+
+function salvarUsuario(usuario){
+    fs.writeFileSync(usuarioFile , JSON.stringify(usuario, null,2),"utf8")
+}
+
+function lerUsuario(){
+    if(!fs.existsSync(usuarioFile)){
+        return[];
+    }
+    const dados=fs.readFileSync(usuarioFile,'utf-8')
+    try{
+        return JSON.parse(dados) || [];
+    }
+    catch(e){
+             return []
+        }
+    }
 
 //http://localhost:3000/saudacao?nome=maria 
 app.get("/saudacao",(req,res)=>{
