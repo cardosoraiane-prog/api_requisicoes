@@ -42,6 +42,20 @@ app.post('/clientes',(req,res)=> {
     salvarClientes(clientes);
     return res.status(201).json({mensagem:"cliente cadastrados com suseso"})
 })
+app.post('/usuario',(req,res)=> {
+    const{nome,email,senha,}=req.body;
+    if(!nome || !email || !senha){
+        return res.status(404).json({erro: "dados incompletos"})
+    }
+    const usuario= lerUsuario();
+    if(usuario.some(c => c.cpf===cpf )){
+        return res.status(400).json({erro:"usuario ja cadastrado"})
+    }
+    const novoUsuario={nome,email,senha,};
+    usuario.push(novoUsuario);
+    salvarUsuario(usuario);
+    return res.status(201).json({mensagem:"cliente cadastrados com suseso"})
+})
 
 //http://localhost:3000/saudacao?nome=maria 
 app.get("/saudacao",(req,res)=>{
