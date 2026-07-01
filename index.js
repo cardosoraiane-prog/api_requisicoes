@@ -50,7 +50,7 @@ app.post('/usuario',(req,res)=> {
         return res.status(404).json({erro: "dados incompletos"})
     }
     const usuario= lerUsuario();
-    if(usuario.some(c => c.cpf===cpf )){
+    if(usuario.some(s => s.senha===senha )){
         return res.status(400).json({erro:"usuario ja cadastrado"})
     }
     const novoUsuario={nome,email,senha,};
